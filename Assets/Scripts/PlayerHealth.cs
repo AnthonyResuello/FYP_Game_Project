@@ -13,11 +13,20 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        currentHP = maxHP;
+        // Check if ProgressManager exists and load the health from there
+        if (ProgressManager.Instance != null)
+        {
+            currentHP = ProgressManager.Instance.playerHealth; // Load the saved health
+        }
+        else
+        {
+            currentHP = maxHP; // If no ProgressManager, initialize with max HP
+        }
+
         if (healthSlider != null)
         {
             healthSlider.maxValue = maxHP;
-            healthSlider.value = maxHP;
+            healthSlider.value = currentHP;
         }
         else
         {
@@ -54,6 +63,12 @@ public class PlayerHealth : MonoBehaviour
         {
             playerHealthText.text = $"Player HP: {currentHP:0}";
         }
+
+        // Save health in ProgressManager
+        if (ProgressManager.Instance != null)
+        {
+            ProgressManager.Instance.playerHealth = currentHP;
+        }
     }
 
     private void CheckGameOver()
@@ -61,7 +76,13 @@ public class PlayerHealth : MonoBehaviour
         if (currentHP <= 0)
         {
             Debug.Log("Game Over! Player has lost.");
-            SceneManager.LoadScene("GameOver");
+            // Reset health when player dies
+            if (ProgressManager.Instance != null)
+            {
+                ProgressManager.Instance.playerHealth = maxHP;
+            }
+
+            SceneManager.LoadScene("GameOver"); // Load Game Over scene
         }
     }
 

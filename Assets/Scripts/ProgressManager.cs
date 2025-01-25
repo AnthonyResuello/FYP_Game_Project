@@ -12,6 +12,8 @@ public class ProgressManager : MonoBehaviour
     public float level3Progress = 0f;
     public float level4Progress = 0f;
 
+    public float playerHealth = 100f; // Player health stored here
+
     void Awake()
     {
         // Ensure the singleton pattern
@@ -30,6 +32,7 @@ public class ProgressManager : MonoBehaviour
         selectedLanguage = PlayerPrefs.GetString("SelectedLanguage", "English");
         Debug.Log("Selected Language: " + selectedLanguage);
     }
+
     public void SetLanguage(string language)
     {
         selectedLanguage = language;
@@ -48,6 +51,7 @@ public class ProgressManager : MonoBehaviour
         level2Progress = 0f;
         level3Progress = 0f;
         level4Progress = 0f;
+        playerHealth = 100f; // Reset player health to max when resetting the game
         selectedLanguage = "English"; // Reset language to default
     }
 
