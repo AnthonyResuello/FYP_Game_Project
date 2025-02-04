@@ -13,10 +13,30 @@ public class QuizManager : MonoBehaviour
     private List<Question> currentQuestions; // List to hold the current set of questions
     private int currentQuestionIndex = 0; // Index to track the current question
 
+    // Feedback data for incorrect answers
+    private List<FeedbackData> feedbackList = new List<FeedbackData>();
+
+    // Struct to store feedback data
+    public struct FeedbackData
+    {
+        public string questionText;
+        public string correctAnswer;
+        public string playerAnswer;
+        public string explanation;
+
+        public FeedbackData(string question, string correct, string player, string explanation)
+        {
+            this.questionText = question;
+            this.correctAnswer = correct;
+            this.playerAnswer = player;
+            this.explanation = explanation;
+        }
+    }
+
     void Start()
     {
         // Load the selected language and current level
-        string selectedLanguage = PlayerPrefs.GetString("SelectedLanguage", "HTML");
+        string selectedLanguage = PlayerPrefs.GetString("SelectedLanguage", "Java");
         int currentLevel = ProgressManager.Instance.currentLevel; // Get the current level from ProgressManager
 
         // Get the questions for the selected language and current level
@@ -60,25 +80,33 @@ public class QuizManager : MonoBehaviour
         else
         {
             Debug.Log("No more questions in this language.");
-            // Optionally, you can transition to the next level or end the game
-            levelManager.MoveToNextLevel();  // Automatically move to the next level when no more questions
+            // Send feedback list to LevelManager
+            levelManager.ShowFeedbackPanel(feedbackList);
         }
     }
 
     // Method to check the answer selected by the user
     void CheckAnswer(int selectedAnswerIndex)
     {
-        if (selectedAnswerIndex == currentQuestions[currentQuestionIndex - 1].correctAnswerIndex)
+        Question currentQuestion = currentQuestions[currentQuestionIndex - 1];
+
+        if (selectedAnswerIndex == currentQuestion.correctAnswerIndex)
         {
             Debug.Log("Correct answer!");
-            // Apply damage to NPC when the player answers correctly
             npcHealth.TakeDamage(10f);   // Apply damage to the NPC
         }
         else
         {
             Debug.Log("Wrong answer!");
-            // Apply damage to player when they answer incorrectly
             playerHealth.TakeDamage(10f); // Apply damage to the player
+
+            // Save feedback for incorrect answers
+            feedbackList.Add(new FeedbackData(
+                currentQuestion.questionText,
+                currentQuestion.possibleAnswers[currentQuestion.correctAnswerIndex],
+                currentQuestion.possibleAnswers[selectedAnswerIndex],
+                currentQuestion.explanation
+            ));
         }
 
         // Update progress bars based on both the player's and NPC's health percentages
@@ -86,5 +114,13 @@ public class QuizManager : MonoBehaviour
 
         // Move to the next question after checking the answer
         DisplayNextQuestion();
+    }
+
+    // New method to get the feedback list for a specific level
+    public List<FeedbackData> GetLevelFeedback(int level)
+    {
+        // You can filter feedback based on the level if necessary
+        // For now, we return all feedback collected so far
+        return feedbackList;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class LanguageSelectionPanel : MonoBehaviour
 {
-    public Button htmlButton;
+    public Button javascriptButton;
     public Button javaButton;
     public Button csharpButton;
     public Button pythonButton;
@@ -14,7 +14,7 @@ public class LanguageSelectionPanel : MonoBehaviour
     void Start()
     {
         // Add listeners to buttons
-        htmlButton.onClick.AddListener(() => SelectLanguage("HTML"));
+        javascriptButton.onClick.AddListener(() => SelectLanguage("JavaScript"));
         javaButton.onClick.AddListener(() => SelectLanguage("Java"));
         csharpButton.onClick.AddListener(() => SelectLanguage("C#"));
         pythonButton.onClick.AddListener(() => SelectLanguage("Python"));

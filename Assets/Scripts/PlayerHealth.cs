@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; // Needed for scene transitions
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,6 +10,9 @@ public class PlayerHealth : MonoBehaviour
     private float currentHP;
 
     public PlayerAnimationController playerAnimationController; // Reference to animation controller
+    public LevelManager levelManager;  // Reference to LevelManager for feedback panel
+
+    private bool isGameOver = false; // Flag to track if game over has been triggered
 
     void Start()
     {
@@ -73,16 +76,22 @@ public class PlayerHealth : MonoBehaviour
 
     private void CheckGameOver()
     {
-        if (currentHP <= 0)
+        if (currentHP <= 0 && !isGameOver)
         {
+            isGameOver = true; // Ensure the game over process happens only once
             Debug.Log("Game Over! Player has lost.");
-            // Reset health when player dies
+
+            // Show feedback panel immediately when the player dies
+            if (levelManager != null)
+            {
+                levelManager.ShowFeedbackPanelOnGameOver(); // Show feedback panel before transitioning
+            }
+
+            // Optionally reset health when player dies (you can adjust this as needed)
             if (ProgressManager.Instance != null)
             {
                 ProgressManager.Instance.playerHealth = maxHP;
             }
-
-            SceneManager.LoadScene("GameOver"); // Load Game Over scene
         }
     }
 

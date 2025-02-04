@@ -156,7 +156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.5429688, y: -2.9588013}
+  m_AnchoredPosition: {x: 3.5429688, y: -2.9587402}
   m_SizeDelta: {x: 129.20941, y: 67.78142}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &316281931
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 650313231}
   - component: {fileID: 650313230}
   m_Layer: 5
-  m_Name: HTMLButton
+  m_Name: JavaScriptButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -522,7 +522,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -341, y: 46.99998}
+  m_AnchoredPosition: {x: -341, y: -161.00002}
   m_SizeDelta: {x: 580, y: 155}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &650313230
@@ -578,7 +578,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: HTML
+          m_StringArgument: JavaScript
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &650313231
@@ -734,7 +734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -341, y: -161}
+  m_AnchoredPosition: {x: -341, y: 47}
   m_SizeDelta: {x: 580, y: 155}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &713266587
@@ -1166,7 +1166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03572c0308a137f46996d23f07886f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  htmlButton: {fileID: 650313230}
+  javascriptButton: {fileID: 650313230}
   javaButton: {fileID: 713266587}
   csharpButton: {fileID: 1638881626}
   pythonButton: {fileID: 2074580425}
@@ -1256,7 +1256,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: HTML, CSS
+  m_Text: JavaScript
 --- !u!222 &1295774664
 CanvasRenderer:
   m_ObjectHideFlags: 0
