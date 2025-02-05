@@ -199,7 +199,7 @@ public class LevelManager : MonoBehaviour
         Text questionText = gameOverMessage.transform.Find("QuestionText").GetComponent<Text>();
         questionText.text = "Game Over!";
         questionText.alignment = TextAnchor.MiddleCenter;  // Center the text
-        questionText.color = new Color(0.180f, 0.180f, 0.180f);  // Set the color to #2E2E2E (RGB)
+        questionText.color = Color.red;
         questionText.fontSize = 52;  // Set the font size to make it bigger (adjust as needed)
 
         // Set the "CorrectAnswerText" to a more encouraging message

@@ -4675,7 +4675,7 @@ MonoBehaviour:
   resumeButton: {fileID: 1887003816}
   settingsButton: {fileID: 591320712}
   quitButton: {fileID: 1129860038}
-  backgroundMusic: {fileID: 548860883}
+  backgroundMusic: {fileID: 387232791}
   darkOverlay: {fileID: 1945666111}
 --- !u!4 &1246966441
 Transform:
