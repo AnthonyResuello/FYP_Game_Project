@@ -12,11 +12,12 @@ public class PlayerHealth : MonoBehaviour
     public PlayerAnimationController playerAnimationController; // Reference to animation controller
     public LevelManager levelManager;  // Reference to LevelManager for feedback panel
 
+    public DamagePopUp damagePopUpManager; // Reference to the DamagePopUp manager
+
     private bool isGameOver = false; // Flag to track if game over has been triggered
 
     void Start()
     {
-        // Check if ProgressManager exists and load the health from there
         if (ProgressManager.Instance != null)
         {
             currentHP = ProgressManager.Instance.playerHealth; // Load the saved health
@@ -49,6 +50,12 @@ public class PlayerHealth : MonoBehaviour
         if (playerAnimationController != null)
         {
             playerAnimationController.PlayHurtAnimation();
+        }
+
+        // Show damage pop-up
+        if (damagePopUpManager != null)
+        {
+            damagePopUpManager.ShowDamage(amount, transform.position + new Vector3(0, 1, 0)); // Position slightly above the player
         }
 
         UpdateHealthBar();

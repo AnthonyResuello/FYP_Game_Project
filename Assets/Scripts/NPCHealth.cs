@@ -10,6 +10,8 @@ public class NPCHealth : MonoBehaviour
 
     public Player2AnimationController npcAnimationController; // Reference to animation controller
 
+    public DamagePopUp damagePopUpManager; // Reference to the DamagePopUp manager
+
     void Start()
     {
         currentHP = maxHP;
@@ -25,6 +27,12 @@ public class NPCHealth : MonoBehaviour
         if (npcAnimationController != null)
         {
             npcAnimationController.Play2HurtAnimation();
+        }
+
+        // Show damage pop-up
+        if (damagePopUpManager != null)
+        {
+            damagePopUpManager.ShowDamage(damage, transform.position + new Vector3(0, 1, 0)); // Position slightly above the NPC
         }
 
         UpdateHealthUI();

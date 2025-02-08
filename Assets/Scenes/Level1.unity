@@ -252,7 +252,7 @@ MonoBehaviour:
   nextLevelButton: {fileID: 524076602}
   backgroundMusic: {fileID: 1414511441}
   feedbackPanelSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
-  playerHealth: {fileID: 2072547261}
+  playerHealth: {fileID: 2045114734}
   npcHealth: {fileID: 1391171191}
   quizManager: {fileID: 691904480}
 --- !u!4 &43727048
@@ -590,8 +590,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000022888, y: 14.659}
-  m_SizeDelta: {x: 1080.346, y: 632.4202}
+  m_AnchoredPosition: {x: 0.000022888, y: 36.75}
+  m_SizeDelta: {x: 1171.227, y: 632.4202}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &248328707
 MonoBehaviour:
@@ -626,15 +626,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Defend Your Kingdom from Fearsome Monsters by Answering Coding Questions.
-
-
-    The
-    further you progress, the more formidable your opponents will become.
-
-
-    Good
-    Luck!'
+  m_Text: "Answer the questions correctly to deal damage to the enemy.\r\n\r\nIncorrect
+    answers will deal damage to your player. \r\n\r\nThink carefully and choose the
+    right anwers to sruvive and win."
 --- !u!222 &248328708
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2501,7 +2495,7 @@ MonoBehaviour:
   - {fileID: 215923662}
   - {fileID: 785806348}
   playerHealth: {fileID: 2045114734}
-  npcHealth: {fileID: 1322929062}
+  npcHealth: {fileID: 1391171191}
   levelManager: {fileID: 43727047}
 --- !u!1 &700059731
 GameObject:
@@ -3227,7 +3221,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -4595,7 +4589,6 @@ GameObject:
   - component: {fileID: 1322929065}
   - component: {fileID: 1322929064}
   - component: {fileID: 1322929063}
-  - component: {fileID: 1322929062}
   m_Layer: 5
   m_Name: NPCHealth
   m_TagString: Untagged
@@ -4603,22 +4596,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1322929062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322929061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d7ad5e96ccacf24f9fc6fb8a9518b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 388187389}
-  npcHealthText: {fileID: 866109179}
-  maxHP: 100
-  npcAnimationController: {fileID: 1391171190}
 --- !u!114 &1322929063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5002,6 +4979,7 @@ MonoBehaviour:
   npcHealthText: {fileID: 866109179}
   maxHP: 100
   npcAnimationController: {fileID: 1391171190}
+  damagePopUpManager: {fileID: 1960133723}
 --- !u!1 &1404909796
 GameObject:
   m_ObjectHideFlags: 0
@@ -5434,7 +5412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 263}
+  m_AnchoredPosition: {x: 0, y: 295}
   m_SizeDelta: {x: 1142.956, y: 157.7373}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1524391862
@@ -5459,7 +5437,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7b23788397fcc5440860536607dfef82, type: 3}
-    m_FontSize: 68
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
@@ -5470,7 +5448,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Welcome to Pixel Quest!
+  m_Text: How to play
 --- !u!222 &1524391863
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5722,7 +5700,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1.1958008, y: -7.7857666}
-  m_SizeDelta: {x: 1400, y: 795.12}
+  m_SizeDelta: {x: 1400, y: 810}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1554277437
 MonoBehaviour:
@@ -7177,6 +7155,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945666111}
   m_CullTransparentMesh: 1
+--- !u!1 &1960133722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960133724}
+  - component: {fileID: 1960133723}
+  m_Layer: 0
+  m_Name: DamagePopUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1960133723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960133722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996d26b11fc1159479906a976d3154bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTextPrefab: {fileID: 5314563900821153535, guid: 2ebfad133bd28ad4589bc41e17f24aa6, type: 3}
+  canvas: {fileID: 836845793}
+--- !u!4 &1960133724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960133722}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 826.42, y: 702.48865, z: 6.337573}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2045114728
 GameObject:
   m_ObjectHideFlags: 0
@@ -7305,6 +7329,7 @@ MonoBehaviour:
   maxHP: 100
   playerAnimationController: {fileID: 2045114733}
   levelManager: {fileID: 43727047}
+  damagePopUpManager: {fileID: 1960133723}
 --- !u!1 &2072547257
 GameObject:
   m_ObjectHideFlags: 0
@@ -7316,7 +7341,6 @@ GameObject:
   - component: {fileID: 2072547258}
   - component: {fileID: 2072547260}
   - component: {fileID: 2072547259}
-  - component: {fileID: 2072547261}
   m_Layer: 5
   m_Name: player1Health
   m_TagString: Untagged
@@ -7385,23 +7409,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072547257}
   m_CullTransparentMesh: 1
---- !u!114 &2072547261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072547257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 197e61e7fab626949b882b486464ede9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 1043430253}
-  playerHealthText: {fileID: 309297318}
-  maxHP: 100
-  playerAnimationController: {fileID: 2045114733}
-  levelManager: {fileID: 43727047}
 --- !u!1 &2136006532
 GameObject:
   m_ObjectHideFlags: 0
@@ -7525,3 +7532,4 @@ SceneRoots:
   - {fileID: 700059733}
   - {fileID: 1382303610}
   - {fileID: 1507286010}
+  - {fileID: 1960133724}

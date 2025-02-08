@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // Needed for scene transitions
+using UnityEngine.SceneManagement; 
 using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
@@ -46,10 +46,10 @@ public class LevelManager : MonoBehaviour
 
         InitializeLevelProgress();
 
-        // Get or create an AudioSource for UI sounds
+
         audioSource = gameObject.AddComponent<AudioSource>();
 
-        // Make sure the button calls the function when clicked
+    
         if (nextLevelButton != null)
         {
             nextLevelButton.onClick.AddListener(OnNextLevelButtonClicked);
@@ -129,14 +129,15 @@ public class LevelManager : MonoBehaviour
     {
         FeedbackDarkOverlay.SetActive(true);
         feedbackPanel.SetActive(true);
+        feedbackPanel.transform.SetSiblingIndex(feedbackPanel.transform.parent.childCount); 
 
-        // Stop background music when feedback panel appears
+
         if (backgroundMusic != null && backgroundMusic.isPlaying)
         {
             backgroundMusic.Pause();
         }
 
-        // Play the sound effect for showing feedback panel
+ 
         if (feedbackPanelSound != null)
         {
             audioSource.PlayOneShot(feedbackPanelSound);
@@ -146,13 +147,49 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Feedback panel sound is not assigned!");
         }
 
-        // Clear existing feedback items in the panel
+    
         foreach (Transform child in feedbackContentParent)
         {
             Destroy(child.gameObject);
         }
 
-        // Populate feedback panel with new feedback items
+
+        GameObject feedbackIntroMessage = Instantiate(feedbackItemPrefab, feedbackContentParent);
+
+      
+        Text questionText = feedbackIntroMessage.transform.Find("QuestionText").GetComponent<Text>();
+        questionText.text = "Your Feedback for this level";
+        questionText.alignment = TextAnchor.MiddleCenter;  
+        questionText.color = new Color(0.180f, 0.180f, 0.180f);
+        questionText.fontSize = 48;  
+
+   
+        Text correctAnswerText = feedbackIntroMessage.transform.Find("PlayerAnswerText").GetComponent<Text>();
+        correctAnswerText.text = "Here’s feedback for the questions you answered incorrectly.";
+        correctAnswerText.alignment = TextAnchor.MiddleCenter;
+        correctAnswerText.color = new Color(0.180f, 0.180f, 0.180f);
+        correctAnswerText.fontSize = 38; 
+
+        Text playerAnswerText = feedbackIntroMessage.transform.Find("CorrectAnswerText").GetComponent<Text>();
+        playerAnswerText.text = "Review your answers and use this feedback to do better next time!";
+        playerAnswerText.alignment = TextAnchor.MiddleCenter;
+        playerAnswerText.color = new Color(0.180f, 0.180f, 0.180f);
+        playerAnswerText.fontSize = 38;  
+
+        playerAnswerText.rectTransform.anchoredPosition = new Vector2(playerAnswerText.rectTransform.anchoredPosition.x, playerAnswerText.rectTransform.anchoredPosition.y - 40f); 
+
+        Text explanationText = feedbackIntroMessage.transform.Find("ExplanationText").GetComponent<Text>();
+        explanationText.text = "";
+        explanationText.alignment = TextAnchor.MiddleCenter;
+        explanationText.color = new Color(0.180f, 0.180f, 0.180f);
+        explanationText.fontSize = 38;  
+
+        playerAnswerText.horizontalOverflow = HorizontalWrapMode.Wrap;  
+        playerAnswerText.verticalOverflow = VerticalWrapMode.Overflow;  
+        correctAnswerText.horizontalOverflow = HorizontalWrapMode.Wrap;  
+        correctAnswerText.verticalOverflow = VerticalWrapMode.Overflow; 
+
+    
         foreach (var feedback in feedbackList)
         {
             GameObject feedbackItem = Instantiate(feedbackItemPrefab, feedbackContentParent);
@@ -162,69 +199,68 @@ public class LevelManager : MonoBehaviour
             feedbackItem.transform.Find("ExplanationText").GetComponent<Text>().text = "Explanation: " + feedback.explanation;
         }
 
-        // Optionally, you can enable the "Next Level" button after feedback is shown
+ 
         nextLevelButton.gameObject.SetActive(true);
     }
+
 
     // Show the feedback panel for Game Over (when player dies)
     public void ShowFeedbackPanelOnGameOver()
     {
-        // Show the feedback panel (with dark overlay)
+   
         FeedbackDarkOverlay.SetActive(true);
         feedbackPanel.SetActive(true);
 
-        // Stop background music when feedback panel appears
+        feedbackPanel.transform.SetSiblingIndex(feedbackPanel.transform.parent.childCount);
+
+
         if (backgroundMusic != null && backgroundMusic.isPlaying)
         {
             backgroundMusic.Pause();
         }
 
-        // Play the feedback panel sound effect if it exists
+ 
         if (feedbackPanelSound != null)
         {
             audioSource.PlayOneShot(feedbackPanelSound);
         }
 
-        // Clear any existing feedback items in the panel
+
         foreach (Transform child in feedbackContentParent)
         {
             Destroy(child.gameObject);
         }
 
 
-        // Add a special Game Over message at the top of the feedback content
+        // Game over message for the feedback panel
         GameObject gameOverMessage = Instantiate(feedbackItemPrefab, feedbackContentParent);
 
-        // Set the "QuestionText" to "Game Over!" and center it with the dark gray color
         Text questionText = gameOverMessage.transform.Find("QuestionText").GetComponent<Text>();
         questionText.text = "Game Over!";
-        questionText.alignment = TextAnchor.MiddleCenter;  // Center the text
+        questionText.alignment = TextAnchor.MiddleCenter;  
         questionText.color = Color.red;
-        questionText.fontSize = 52;  // Set the font size to make it bigger (adjust as needed)
+        questionText.fontSize = 52;  
 
-        // Set the "CorrectAnswerText" to a more encouraging message
         Text correctAnswerText = gameOverMessage.transform.Find("PlayerAnswerText").GetComponent<Text>();
         correctAnswerText.text = "Don't worry, you'll do better next time!"; 
         correctAnswerText.alignment = TextAnchor.MiddleCenter;
         correctAnswerText.color = new Color(0.180f, 0.180f, 0.180f);
-        correctAnswerText.fontSize = 38;  // Set the font size for this text
+        correctAnswerText.fontSize = 38; 
 
-        // Set the "PlayerAnswerText" to a more motivating message
         Text playerAnswerText = gameOverMessage.transform.Find("CorrectAnswerText").GetComponent<Text>();
         playerAnswerText.text = "Here’s some feedback to help you improve your next attempt!";
         playerAnswerText.alignment = TextAnchor.MiddleCenter;
         playerAnswerText.color = new Color(0.180f, 0.180f, 0.180f);
-        playerAnswerText.fontSize = 38;  // Set the font size for this text
+        playerAnswerText.fontSize = 38;  
 
-        // Set the "ExplanationText" to offer helpful advice
         Text explanationText = gameOverMessage.transform.Find("ExplanationText").GetComponent<Text>();
         explanationText.text = "";
         explanationText.alignment = TextAnchor.MiddleCenter;
         explanationText.color = new Color(0.180f, 0.180f, 0.180f);
-        explanationText.fontSize = 38;  // Set the font size for this text
+        explanationText.fontSize = 38;  
 
-        playerAnswerText.horizontalOverflow = HorizontalWrapMode.Wrap;  // Enable wrapping
-        playerAnswerText.verticalOverflow = VerticalWrapMode.Overflow;  // Allow vertical overflow
+        playerAnswerText.horizontalOverflow = HorizontalWrapMode.Wrap;  
+        playerAnswerText.verticalOverflow = VerticalWrapMode.Overflow;  
         // Get the feedback data for the current level (same feedback data as when a level ends)
         List<QuizManager.FeedbackData> feedbackList = quizManager.GetLevelFeedback(ProgressManager.Instance.currentLevel);
 
@@ -238,29 +274,28 @@ public class LevelManager : MonoBehaviour
             feedbackItem.transform.Find("ExplanationText").GetComponent<Text>().text = "Explanation: " + feedback.explanation;
         }
 
-        // Enable the Next Level button after the feedback is shown
+      
         nextLevelButton.gameObject.SetActive(true);
 
-        // Set the button’s onClick listener to restart the game or show the Game Over scene
+    
         nextLevelButton.onClick.RemoveAllListeners();
-        nextLevelButton.onClick.AddListener(RestartLevel); // Optionally restart or show Game Over screen
+        nextLevelButton.onClick.AddListener(RestartLevel); 
     }
 
 
-    // Function to restart the level or load a different scene when button is clicked
     public void RestartLevel()
     {
-        // Optionally, you can load the Game Over screen or retry the current level
-        SceneManager.LoadScene("GameOver"); // Or load any specific scene like "MainMenu" or "Level1"
+  
+        SceneManager.LoadScene("GameOver"); 
     }
 
     // Function to move to the next level when the button is clicked
     public void OnNextLevelButtonClicked()
     {
-        FeedbackDarkOverlay.SetActive(false); // Hide overlay
-        feedbackPanel.SetActive(false); // Hide feedback panel
+        FeedbackDarkOverlay.SetActive(false); 
+        feedbackPanel.SetActive(false); 
 
-        // Resume background music when feedback panel closes
+    
         if (backgroundMusic != null)
         {
             backgroundMusic.UnPause();
@@ -289,7 +324,7 @@ public class LevelManager : MonoBehaviour
         else
         {
             Debug.Log("All levels completed. Transitioning to end screen.");
-            SceneManager.LoadScene("Win"); // Load win screen if all levels are done
+            SceneManager.LoadScene("Win"); 
         }
     }
 }

@@ -122,6 +122,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &39978078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 39978080}
+  - component: {fileID: 39978079}
+  m_Layer: 0
+  m_Name: DamagePopUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &39978079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39978078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996d26b11fc1159479906a976d3154bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageTextPrefab: {fileID: 5314563900821153535, guid: 2ebfad133bd28ad4589bc41e17f24aa6, type: 3}
+  canvas: {fileID: 836845793}
+--- !u!4 &39978080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39978078}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 826.42, y: 702.48865, z: 6.337573}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &57193292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2891,7 +2937,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -4758,7 +4804,6 @@ GameObject:
   - component: {fileID: 1322929065}
   - component: {fileID: 1322929064}
   - component: {fileID: 1322929063}
-  - component: {fileID: 1322929062}
   m_Layer: 5
   m_Name: NPCHealth
   m_TagString: Untagged
@@ -4766,22 +4811,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1322929062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322929061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d7ad5e96ccacf24f9fc6fb8a9518b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 388187389}
-  npcHealthText: {fileID: 866109179}
-  maxHP: 100
-  npcAnimationController: {fileID: 1391171190}
 --- !u!114 &1322929063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5038,6 +5067,7 @@ MonoBehaviour:
   npcHealthText: {fileID: 866109179}
   maxHP: 100
   npcAnimationController: {fileID: 1391171190}
+  damagePopUpManager: {fileID: 39978079}
 --- !u!1 &1454886318
 GameObject:
   m_ObjectHideFlags: 0
@@ -5078,8 +5108,8 @@ MonoBehaviour:
   nextLevelButton: {fileID: 571661255}
   backgroundMusic: {fileID: 1775523673}
   feedbackPanelSound: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
-  playerHealth: {fileID: 2072547261}
-  npcHealth: {fileID: 1322929062}
+  playerHealth: {fileID: 2045114734}
+  npcHealth: {fileID: 1391171191}
   quizManager: {fileID: 1873507429}
 --- !u!4 &1454886320
 Transform:
@@ -6258,8 +6288,8 @@ MonoBehaviour:
   - {fileID: 666760035}
   - {fileID: 215923662}
   - {fileID: 785806348}
-  playerHealth: {fileID: 2072547261}
-  npcHealth: {fileID: 1322929062}
+  playerHealth: {fileID: 2045114734}
+  npcHealth: {fileID: 1391171191}
   levelManager: {fileID: 1454886319}
 --- !u!4 &1873507430
 Transform:
@@ -7250,6 +7280,7 @@ MonoBehaviour:
   maxHP: 100
   playerAnimationController: {fileID: 2045114733}
   levelManager: {fileID: 1454886319}
+  damagePopUpManager: {fileID: 39978079}
 --- !u!1 &2065548973
 GameObject:
   m_ObjectHideFlags: 0
@@ -7340,7 +7371,6 @@ GameObject:
   - component: {fileID: 2072547258}
   - component: {fileID: 2072547260}
   - component: {fileID: 2072547259}
-  - component: {fileID: 2072547261}
   m_Layer: 5
   m_Name: player1Health
   m_TagString: Untagged
@@ -7409,23 +7439,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2072547257}
   m_CullTransparentMesh: 1
---- !u!114 &2072547261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072547257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 197e61e7fab626949b882b486464ede9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthSlider: {fileID: 1043430253}
-  playerHealthText: {fileID: 309297318}
-  maxHP: 100
-  playerAnimationController: {fileID: 2045114733}
-  levelManager: {fileID: 1454886319}
 --- !u!1 &2137850273
 GameObject:
   m_ObjectHideFlags: 0
@@ -7518,3 +7531,4 @@ SceneRoots:
   - {fileID: 1051242994}
   - {fileID: 1212254033}
   - {fileID: 1501724562}
+  - {fileID: 39978080}
