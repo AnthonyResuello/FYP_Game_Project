@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 
 public class QuizManager : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class QuizManager : MonoBehaviour
 
     // Feedback data for incorrect answers
     private List<FeedbackData> feedbackList = new List<FeedbackData>();
+
+    // UI Feedback Colors
+    public Color correctColor = Color.green;
+    public Color wrongColor = Color.red;
+    public Color defaultColor = Color.white;
 
     // Struct to store feedback data
     public struct FeedbackData
@@ -66,6 +72,7 @@ public class QuizManager : MonoBehaviour
                 {
                     answerButtons[i].gameObject.SetActive(true); // Ensure the button is active
                     answerButtons[i].GetComponentInChildren<Text>().text = currentQuestion.possibleAnswers[i];
+                    answerButtons[i].GetComponent<Image>().color = defaultColor; // Reset button color
 
                     // Add listener to each button based on the answer index
                     int answerIndex = i;
@@ -92,18 +99,30 @@ public class QuizManager : MonoBehaviour
     {
         Question currentQuestion = currentQuestions[currentQuestionIndex - 1];
 
+        // Disable buttons to prevent multiple clicks
+        foreach (Button btn in answerButtons)
+        {
+            btn.interactable = false;
+        }
+
         if (selectedAnswerIndex == currentQuestion.correctAnswerIndex)
         {
             Debug.Log("Correct answer!");
             npcHealth.TakeDamage(10f);   // Apply damage to the NPC
             playerAnimationController.PlayAttackAnimation(); // Show animation for attack 
 
+            // Highlight correct answer
+            answerButtons[selectedAnswerIndex].GetComponent<Image>().color = correctColor;
         }
         else
         {
             Debug.Log("Wrong answer!");
             playerHealth.TakeDamage(10f); // Apply damage to the player
             player2AnimationController.Play2AttackAnimation(); // Show animation for attack 
+
+            // Highlight wrong answer in red and correct one in green
+            answerButtons[selectedAnswerIndex].GetComponent<Image>().color = wrongColor;
+            answerButtons[currentQuestion.correctAnswerIndex].GetComponent<Image>().color = correctColor;
 
             // Save feedback for incorrect answers
             feedbackList.Add(new FeedbackData(
@@ -117,15 +136,27 @@ public class QuizManager : MonoBehaviour
         // Update progress bars based on both the player's and NPC's health percentages
         levelManager.UpdateProgress(playerHealth.GetHealthPercentage(), npcHealth.GetHealthPercentage());
 
-        // Move to the next question after checking the answer
-        DisplayNextQuestion();
+      
+        StartCoroutine(NextQuestionDelay());
+    }
+
+
+    IEnumerator NextQuestionDelay()
+    {
+        yield return new WaitForSeconds(1.5f); 
+
+        
+        foreach (Button btn in answerButtons)
+        {
+            btn.interactable = true;
+        }
+
+        DisplayNextQuestion(); // Display the next question
     }
 
     // New method to get the feedback list for a specific level
     public List<FeedbackData> GetLevelFeedback(int level)
     {
-        // You can filter feedback based on the level if necessary
-        // For now, we return all feedback collected so far
-        return feedbackList;
+        return feedbackList; 
     }
 }
