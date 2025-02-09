@@ -4968,17 +4968,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391171184}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 836845790}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 555.8, y: 154}
-  m_SizeDelta: {x: 198.87, y: 161.4505}
+  m_AnchoredPosition: {x: 536.87, y: 216.4}
+  m_SizeDelta: {x: 966.5061, y: 784.646}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1391171187
 MonoBehaviour:
@@ -5000,7 +5000,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1168077657, guid: 9fee9753decaa874eb8dfc4547e49d1e, type: 3}
+  m_Sprite: {fileID: 463045214, guid: df9d0f2748554744a8d37b1dd1ebf8d2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5028,7 +5028,7 @@ Animator:
   m_GameObject: {fileID: 1391171184}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7f8c2358636b28c4a8f0e93f0ab4a1fa, type: 2}
+  m_Controller: {fileID: 9100000, guid: 382955a08057e244aa9d68bb53a14112, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6291,6 +6291,8 @@ MonoBehaviour:
   playerHealth: {fileID: 2045114734}
   npcHealth: {fileID: 1391171191}
   levelManager: {fileID: 1454886319}
+  playerAnimationController: {fileID: 2045114733}
+  player2AnimationController: {fileID: 1391171190}
 --- !u!4 &1873507430
 Transform:
   m_ObjectHideFlags: 0

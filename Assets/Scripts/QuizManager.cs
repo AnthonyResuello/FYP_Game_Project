@@ -9,6 +9,8 @@ public class QuizManager : MonoBehaviour
     public PlayerHealth playerHealth; // Reference to PlayerHealth script
     public NPCHealth npcHealth; // Reference to NPCHealth script
     public LevelManager levelManager; // Reference to LevelManager script
+    public PlayerAnimationController playerAnimationController;
+    public Player2AnimationController player2AnimationController;
 
     private List<Question> currentQuestions; // List to hold the current set of questions
     private int currentQuestionIndex = 0; // Index to track the current question
@@ -94,11 +96,14 @@ public class QuizManager : MonoBehaviour
         {
             Debug.Log("Correct answer!");
             npcHealth.TakeDamage(10f);   // Apply damage to the NPC
+            playerAnimationController.PlayAttackAnimation(); // Show animation for attack 
+
         }
         else
         {
             Debug.Log("Wrong answer!");
             playerHealth.TakeDamage(10f); // Apply damage to the player
+            player2AnimationController.Play2AttackAnimation(); // Show animation for attack 
 
             // Save feedback for incorrect answers
             feedbackList.Add(new FeedbackData(
