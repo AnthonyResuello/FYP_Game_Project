@@ -4,45 +4,45 @@ using UnityEngine.SceneManagement; // Needed for scene transitions
 
 public class PlayerHealth : MonoBehaviour
 {
-    public Slider healthSlider; // UI Slider element to display health
-    public Text playerHealthText; // UI Text element to display numeric health
-    public float maxHP = 100f;
-    private float currentHP;
+    public Slider healthSlider; // Health Bar Slider 
+    public Text playerHealthText; // Health Text
+    public float maxHP = 100f; // Max Health of the Player
+    private float currentHP; // Current Health of the player
 
-    public PlayerAnimationController playerAnimationController; // Reference to animation controller
-    public LevelManager levelManager;  // Reference to LevelManager for feedback panel
+    public PlayerAnimationController playerAnimationController; 
+    public LevelManager levelManager;  
 
-    public DamagePopUp damagePopUpManager; // Reference to the DamagePopUp manager
+    public DamagePopUp damagePopUpManager; 
 
-    private bool isGameOver = false; // Flag to track if game over has been triggered
+    private bool isGameOver = false; // Track if game over has been triggered
 
     void Start()
     {
+
+        // Load the saved player health from ProgressManager (if available) 
         if (ProgressManager.Instance != null)
         {
             currentHP = ProgressManager.Instance.playerHealth; // Load the saved health
         }
         else
         {
-            currentHP = maxHP; // If no ProgressManager, initialize with max HP
+            currentHP = maxHP; // If no ProgressManager, set to max Health
         }
 
+        // Check if healthSlider is assigned
         if (healthSlider != null)
         {
             healthSlider.maxValue = maxHP;
             healthSlider.value = currentHP;
         }
-        else
-        {
-            Debug.LogError("Health Slider is not assigned in PlayerHealth.");
-        }
 
         UpdateHealthBar();
     }
 
+    // Method to apply damage to player 
     public void TakeDamage(float amount)
     {
-        Debug.Log($"Applying Damage: {amount}");
+      
         currentHP -= amount;
         if (currentHP < 0) currentHP = 0;
 
@@ -62,6 +62,8 @@ public class PlayerHealth : MonoBehaviour
         CheckGameOver();
     }
 
+
+    // Method to update the health slider and text 
     private void UpdateHealthBar()
     {
         if (healthSlider != null)
@@ -81,6 +83,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // Method to check if the game is over (health <= 0)
     private void CheckGameOver()
     {
         if (currentHP <= 0 && !isGameOver)
@@ -91,10 +94,9 @@ public class PlayerHealth : MonoBehaviour
             // Show feedback panel immediately when the player dies
             if (levelManager != null)
             {
-                levelManager.ShowFeedbackPanelOnGameOver(); // Show feedback panel before transitioning
+                levelManager.ShowFeedbackPanelOnGameOver(); // Show feedback panel 
             }
 
-            // Optionally reset health when player dies (you can adjust this as needed)
             if (ProgressManager.Instance != null)
             {
                 ProgressManager.Instance.playerHealth = maxHP;

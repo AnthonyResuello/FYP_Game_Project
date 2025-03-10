@@ -4,68 +4,71 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    public Button playButton;
-    public Button playInstructions;
-    public AudioClip buttonClickSound;   // Sound for button click
-    public AudioClip backgroundMusic;    // Background music for the main menu
-    public AudioClip panelOpenSound;     // Sound for when the language selection panel opens
-    public AudioClip panelCloseSound;    // Sound for when the language selection panel closes
+    public Button playButton; // Play Button 
+    public Button playInstructions; // Instructions Button
 
-    private AudioSource audioSource;      // AudioSource to handle music and sound effects
-    private AudioSource backgroundMusicSource;  // Separate AudioSource for background music
+    public AudioClip buttonClickSound; // Sound effect for button click
+    public AudioClip backgroundMusic; // Background music 
+    public AudioClip panelOpenSound; // Sound effect for opening panel
+    public AudioClip panelCloseSound; // Sound effect for closing panel
+
+    private AudioSource audioSource; // AudioSource to handle music and sound effects
+    private AudioSource backgroundMusicSource; // Separate AudioSource for background music
 
     public GameObject languageSelectionPanel; // Language selection panel
-    public GameObject darkOverlay;       // Dark overlay for the transition
+    public GameObject darkOverlay; // Dark overlay 
 
     void Start()
     {
-        // Get or create an AudioSource for UI sounds
-        audioSource = gameObject.AddComponent<AudioSource>();
-        backgroundMusicSource = gameObject.AddComponent<AudioSource>();
+        audioSource = gameObject.AddComponent<AudioSource>(); // Audtio Source for Sound Effects
+        backgroundMusicSource = gameObject.AddComponent<AudioSource>(); // Audio Source for Background Music 
 
-        // Set up background music to loop and play
         backgroundMusicSource.clip = backgroundMusic;
-        backgroundMusicSource.loop = true;
-        backgroundMusicSource.Play();
+        backgroundMusicSource.loop = true; // Loop background music 
+        backgroundMusicSource.Play(); // Play the background music
 
-        // Assign button listeners
-        playButton.onClick.AddListener(PlayGame);
+        playButton.onClick.AddListener(PlayGame); 
         playInstructions.onClick.AddListener(PlayInstructions);
     }
+
 
     // Method to show the language selection panel and play its sound
     public void ShowLanguageSelectionPanel()
     {
-        // Play the sound effect for opening the panel
+
+        // Check if the panel open sound effect is assigned
         if (panelOpenSound != null)
         {
-            audioSource.PlayOneShot(panelOpenSound);
+            audioSource.PlayOneShot(panelOpenSound); // Play the sound effect 
         }
 
-        // Stop the background music when the language selection panel is shown
         backgroundMusicSource.Pause();  // Pause the background music
 
-        languageSelectionPanel.SetActive(true);    // Activate the language selection panel
-        darkOverlay.SetActive(true);   // Activate the dark overlay
-        Time.timeScale = 0f;          // Pause the game while the panel is open
+        languageSelectionPanel.SetActive(true); // Activate the language selection panel
+        darkOverlay.SetActive(true); // Activate the dark overlay
+
+        Time.timeScale = 0f; // Pause the game while the panel is open
     }
+
 
     // Method to hide the language selection panel and dark overlay
     public void HideLanguageSelectionPanel()
     {
-        // Play the sound effect for closing the panel
+        // Check if the panel close sound effect is assigned
         if (panelCloseSound != null)
         {
-            audioSource.PlayOneShot(panelCloseSound);
+            audioSource.PlayOneShot(panelCloseSound); // Play sound effect 
         }
 
-        languageSelectionPanel.SetActive(false);    // Deactivate the language selection panel
-        darkOverlay.SetActive(false);   // Deactivate the dark overlay
-        Time.timeScale = 1f;           // Resume the game
+        languageSelectionPanel.SetActive(false); // Deactivate the language selection panel
+        darkOverlay.SetActive(false); // Deactivate the dark overlay
+        Time.timeScale = 1f;  // Resume the game
 
-        // Resume the background music when the language selection panel is closed
-        backgroundMusicSource.Play(); // Restart playing the background music
+        backgroundMusicSource.Play(); // Resume the background music when the panel is closed 
     }
+
+
+
 
     // Method to handle the Play button click
     public void PlayGame()
@@ -74,6 +77,8 @@ public class MainMenu : MonoBehaviour
         ShowLanguageSelectionPanel(); // Show the language selection panel
     }
 
+
+
     // Method to handle the Instructions button click
     public void PlayInstructions()
     {
@@ -81,9 +86,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Instructions"); // Load the Instructions scene
     }
 
-    // Method to play the button click sound
+
     void PlayButtonClickSound()
     {
+        // Check if the audioSource and button click sound are assigned
         if (audioSource != null && buttonClickSound != null)
         {
             audioSource.PlayOneShot(buttonClickSound); // Play the button click sound

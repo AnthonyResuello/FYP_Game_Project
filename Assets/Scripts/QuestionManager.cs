@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class QuestionManager : MonoBehaviour
 {
-    public static QuestionManager Instance; // Singleton instance for easy access
+    public static QuestionManager Instance;
 
-    // Store questions, answers, and correct answers in a dictionary for each language and level
+    // Dictionary to store questions, answers, and correct answers by language and level
     private Dictionary<string, Dictionary<int, List<Question>>> questionsByLanguageAndLevel;
 
     void Awake()
@@ -20,7 +20,7 @@ public class QuestionManager : MonoBehaviour
             Destroy(gameObject); // Prevent duplicates of the QuestionManager in the scene
         }
 
-        // Initialize the questions
+        // Set up the dictionary with questions for different languages and levels
         questionsByLanguageAndLevel = new Dictionary<string, Dictionary<int, List<Question>>>
         {
             {
@@ -471,15 +471,17 @@ public class QuestionManager : MonoBehaviour
         }
     }
 }
-// Define a class to represent a question with answers and correct answer index
+
+// Question class to represent the question 
 [System.Serializable]
 public class Question
 {
-    public string questionText;
-    public string[] possibleAnswers;
-    public int correctAnswerIndex;
-    public string explanation; // Explanation for the correct answer
+    public string questionText; // Question text
+    public string[] possibleAnswers; // List of possible answers
+    public int correctAnswerIndex; // Correct answer
+    public string explanation; // Explanation for the answer
 
+    // Constructor for the question
     public Question(string questionText, string[] possibleAnswers, int correctAnswerIndex, string explanation)
     {
         this.questionText = questionText;

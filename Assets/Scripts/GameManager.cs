@@ -3,14 +3,15 @@ using UnityEngine.UI; // Required for UI components
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject infoPanel;         // Reference to the InfoPanel
-    public GameObject darkOverlay;        // Reference to the DarkOverlay
-    public Button closeButton;            // Reference to the Close button
-    public AudioSource backgroundMusic;   // Reference to the background music AudioSource
-    public AudioSource panelOpenSound;    // Reference to the sound played when the panel opens
-    public AudioClip confirmSound;        // Reference to the confirm sound effect
+    public GameObject infoPanel; // Info panel 
+    public GameObject darkOverlay; // Add a dark overlay 
+    public Button closeButton; // Close Button to close panel 
 
-    private AudioSource audioSource;      // Reference to an AudioSource for UI sounds
+    public AudioSource backgroundMusic; // Background music for the game 
+    public AudioSource panelOpenSound; // Panel sound effect
+    public AudioClip confirmSound; // Confirm sound effect
+
+    private AudioSource audioSource; // Reference for the AudioSource for UI sounds
 
     void Start()
     {
@@ -24,65 +25,66 @@ public class GameManager : MonoBehaviour
         closeButton.onClick.AddListener(OnCloseButtonClicked);
     }
 
+
+
     // Method to show the info panel and dark overlay
     public void ShowInfoPanel()
     {
-        infoPanel.SetActive(true);    // Activate the info panel
-        darkOverlay.SetActive(true);   // Activate the dark overlay
-        Time.timeScale = 0f;          // Pause the game while the panel is open
+        infoPanel.SetActive(true); // Activate the info panel
+        darkOverlay.SetActive(true); // Activate dark overlay 
+        Time.timeScale = 0f; // Pause the game when the panel is open 
 
-        // Play the sound effect for opening the panel
+        // Check if open panel sound effect is assigned 
         if (panelOpenSound != null)
         {
-            panelOpenSound.Play();
+            panelOpenSound.Play();  // Play panel sound effect
         }
-        else
-        {
-            Debug.LogError("Panel open sound is not assigned!");
-        }
+    
     }
+
+
 
     // Method to hide the info panel and dark overlay
     public void HideInfoPanel()
     {
-        infoPanel.SetActive(false);    // Deactivate the info panel
-        darkOverlay.SetActive(false);   // Deactivate the dark overlay
-        Time.timeScale = 1f;           // Resume the game
+        infoPanel.SetActive(false); // Deactivate the info panel
+        darkOverlay.SetActive(false); // Deactivate the dark overlay
+        Time.timeScale = 1f; // Resume the game when the panel is closed 
 
-        // Start the background music when the info panel is closed
-        StartBackgroundMusic();
+        StartBackgroundMusic(); // Start the background music 
     }
+
+
 
     // Method to start the background music
     private void StartBackgroundMusic()
     {
+        // Check if background music is assigned and if it isn't already playing
         if (backgroundMusic != null && !backgroundMusic.isPlaying)
         {
             backgroundMusic.Play(); // Start playing the background music
         }
-        else
-        {
-            Debug.LogError("Background music AudioSource is not assigned or is already playing!");
-        }
+     
     }
+
+
 
     // Method to handle button click
     private void OnCloseButtonClicked()
     {
         PlayConfirmSound(); // Play confirmation sound on button click
-        HideInfoPanel();    // Hide the info panel
+        HideInfoPanel(); // Hide the info panel
     }
+
+
 
     // Method to play the confirm sound
     public void PlayConfirmSound()
     {
+        // Check if confirm sound is assigned 
         if (confirmSound != null)
         {
             audioSource.PlayOneShot(confirmSound); // Play confirm sound
-        }
-        else
-        {
-            Debug.LogError("Confirm sound is not assigned!");
         }
     }
 }

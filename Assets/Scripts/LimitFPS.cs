@@ -6,18 +6,7 @@ public class FPSLimiter : MonoBehaviour
 
     void Start()
     {
-        // Set the target frame rate
+        // Set the target frame rate once when the game starts
         Application.targetFrameRate = targetFPS;
-        // Optional: Adjust the quality settings to make sure VSync is off
-
-    }
-
-    void Update()
-    {
-        // Dynamically limit the FPS (if you want to adjust in real-time)
-        if (Application.targetFrameRate != targetFPS)
-        {
-            Application.targetFrameRate = targetFPS;
-        }
     }
 }

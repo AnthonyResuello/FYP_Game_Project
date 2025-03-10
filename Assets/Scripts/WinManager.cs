@@ -4,20 +4,19 @@ using UnityEngine.UI;
 
 public class WinManager : MonoBehaviour
 {
-    public Button mainMenuButton;  // Reference to the Main Menu button
-    public Button playAgainButton; // Reference to the Play Again button
-    public GameObject winPanel;    // Reference to the Win panel UI (UI element)
+    public Button mainMenuButton;  
+    public Button playAgainButton; 
+    public GameObject winPanel;    
 
     void Start()
     {
-        // Check if buttons are assigned and show a warning if not
+        // Check if buttons are assigned 
         if (mainMenuButton == null || playAgainButton == null)
         {
-            Debug.LogError("Buttons are not assigned in the Inspector!");
-            return;
+            return; // Return if buttons are not assigned 
         }
 
-        // Automatically assign button actions when the scene starts
+        // Assign button actions
         mainMenuButton.onClick.AddListener(OnMainMenuClicked);
         playAgainButton.onClick.AddListener(OnPlayAgainClicked);
 
@@ -29,31 +28,33 @@ public class WinManager : MonoBehaviour
         Time.timeScale = 0f; // Pause the game
     }
 
-    // This function will be called when the Main Menu button is clicked
+
+    // Main Menu button clicked
     public void OnMainMenuClicked()
     {
-        // Reset progress in the ProgressManager when going to the main menu (not saving anything)
+    
         if (ProgressManager.Instance != null)
         {
             ProgressManager.Instance.ResetGame(); // Reset progress to default state
         }
 
-        // Load the main menu scene
-        SceneManager.LoadScene("MainMenu"); // Ensure this is your main menu scene name
+        SceneManager.LoadScene("MainMenu"); // Load the main menu scene
         Time.timeScale = 1f; // Unpause the game when exiting to the main menu
     }
 
-    // This function will be called when the Play Again button is clicked
+
+
+    // Play Again button clicked
     public void OnPlayAgainClicked()
     {
-        // Reset progress in the ProgressManager when restarting the game
+     
         if (ProgressManager.Instance != null)
         {
             ProgressManager.Instance.ResetGame(); // Reset progress to default state
         }
 
         // Reload the first level scene
-        SceneManager.LoadScene("Level1"); // Ensure this is your level name
+        SceneManager.LoadScene("Level1"); 
         Time.timeScale = 1f; // Unpause the game when restarting
     }
 }

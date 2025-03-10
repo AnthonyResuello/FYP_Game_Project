@@ -5,21 +5,18 @@ using UnityEngine.UI;
 public class Instructions : MonoBehaviour
 {
 
-    public Button startButton;
+    public Button startButton; // Start Button 
 
 
     void Start()
     {
-        // Automatically assign button actions when the scene starts
         startButton.onClick.AddListener(Game);
-
     }
 
-    // This function will be called when the Start Game button is clicked
+    // Method to load the main menu scene 
     public void Game()
     {
-        // Assuming your main game scene is called "SampleScene"
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu"); // Load Main Menu Scene 
     }
 
 

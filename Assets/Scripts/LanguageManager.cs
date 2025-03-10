@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class LanguageManager : MonoBehaviour
 {
-    // Singleton to ensure we can access this from anywhere
+  
     public static LanguageManager Instance;
-
-    // Language chosen by the player
-    public string selectedLanguage;
+    public string selectedLanguage; // Language chosen by the player
 
     void Awake()
     {
-        // Make sure the script is a singleton
+       // Ensure there is only one instance of the Langauge Manager
         if (Instance == null)
         {
             Instance = this;
@@ -21,10 +19,9 @@ public class LanguageManager : MonoBehaviour
         }
     }
 
-    // Method to set the selected language
+    // Method to set the selected programming language for the quiz 
     public void SetSelectedLanguage(string language)
     {
         selectedLanguage = language;
-        Debug.Log("Selected Language: " + selectedLanguage);
     }
 }

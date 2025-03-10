@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Image progressBarFill2;  // Progress bar for Level 2
     [SerializeField] private Image progressBarFill3;  // Progress bar for Level 3
     [SerializeField] private Image progressBarFill4;  // Progress bar for Level 4
-    [SerializeField] private GameObject FeedbackDarkOverlay; // Reference to the dark overlay panel
+    [SerializeField] private GameObject FeedbackDarkOverlay; 
 
     [Header("Feedback Panel Elements")]
     public GameObject feedbackPanel;
@@ -32,42 +32,29 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        if (playerHealth == null)
-            Debug.LogError("PlayerHealth is not assigned in LevelManager!");
-        if (npcHealth == null)
-            Debug.LogError("NPCHealth is not assigned in LevelManager!");
-        if (quizManager == null)
-            Debug.LogError("QuizManager is not assigned in LevelManager!");
-        if (ProgressManager.Instance == null)
-        {
-            Debug.LogError("ProgressManager.Instance is null!");
-            return;
-        }
+       
+        InitializeLevelProgress(); // Initialize the progress bars when the game starts
 
-        InitializeLevelProgress();
+        audioSource = gameObject.AddComponent<AudioSource>(); // Set up the audio source
 
-
-        audioSource = gameObject.AddComponent<AudioSource>();
-
-    
+        // Check if the next level button is assigned
         if (nextLevelButton != null)
         {
-            nextLevelButton.onClick.AddListener(OnNextLevelButtonClicked);
-        }
-        else
-        {
-            Debug.LogError("Next Level Button is not assigned!");
+            nextLevelButton.onClick.AddListener(OnNextLevelButtonClicked); 
         }
     }
 
+
+    //Method to initialize the level progress (progress bars)
     void InitializeLevelProgress()
     {
+        // Check if any of the progress bar fill are not assigned 
         if (progressBarFill1 == null || progressBarFill2 == null || progressBarFill3 == null || progressBarFill4 == null)
         {
-            Debug.LogError("Progress bar(s) not assigned in the Inspector!");
-            return;
+            return; // Exit the method if any progress bar fill are not assigned 
         }
 
+        // Set the progress of each level in the progress bar 
         currentLevel = ProgressManager.Instance.currentLevel;
         progressBarFill1.fillAmount = (currentLevel >= 1) ? ProgressManager.Instance.level1Progress : 0f;
         progressBarFill2.fillAmount = (currentLevel >= 2) ? ProgressManager.Instance.level2Progress : 0f;
@@ -75,17 +62,19 @@ public class LevelManager : MonoBehaviour
         progressBarFill4.fillAmount = (currentLevel >= 4) ? ProgressManager.Instance.level4Progress : 0f;
     }
 
+
+    // Method to update progress bar based on player and NPC health percentage
     public void UpdateProgress(float playerHealthPercentage, float npcHealthPercentage)
     {
         if (npcHealthPercentage < 0f || npcHealthPercentage > 1f)
         {
-            Debug.LogError("NPC health percentage out of range: " + npcHealthPercentage);
-            return;
+            return; // If NPC health percentage is out of range, exit early
         }
 
         float targetFillAmount = (1f - npcHealthPercentage) * maxProgress;
         currentLevel = ProgressManager.Instance.currentLevel;
 
+        // Update the progress bar for the current level based on NPC health
         if (currentLevel == 1)
         {
             progressBarFill1.fillAmount = targetFillAmount;
@@ -124,30 +113,26 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Show the feedback panel and populate it with feedback data
+    // Method to show the feedback panel and populate it with feedback data
     public void ShowFeedbackPanel(List<QuizManager.FeedbackData> feedbackList)
     {
-        FeedbackDarkOverlay.SetActive(true);
-        feedbackPanel.SetActive(true);
-        feedbackPanel.transform.SetSiblingIndex(feedbackPanel.transform.parent.childCount); 
+        FeedbackDarkOverlay.SetActive(true); // Activate the dark overlay 
+        feedbackPanel.SetActive(true); // Aticate the feedback panel 
+        feedbackPanel.transform.SetSiblingIndex(feedbackPanel.transform.parent.childCount);
 
-
+        // Check if background music is playing then pause it
         if (backgroundMusic != null && backgroundMusic.isPlaying)
         {
             backgroundMusic.Pause();
         }
 
- 
+        // Check if feedback panel sound effect is assigned 
         if (feedbackPanelSound != null)
         {
             audioSource.PlayOneShot(feedbackPanelSound);
         }
-        else
-        {
-            Debug.LogError("Feedback panel sound is not assigned!");
-        }
 
-    
+        // Clear the previous feedback items from the panel
         foreach (Transform child in feedbackContentParent)
         {
             Destroy(child.gameObject);
@@ -187,9 +172,9 @@ public class LevelManager : MonoBehaviour
         playerAnswerText.horizontalOverflow = HorizontalWrapMode.Wrap;  
         playerAnswerText.verticalOverflow = VerticalWrapMode.Overflow;  
         correctAnswerText.horizontalOverflow = HorizontalWrapMode.Wrap;  
-        correctAnswerText.verticalOverflow = VerticalWrapMode.Overflow; 
+        correctAnswerText.verticalOverflow = VerticalWrapMode.Overflow;
 
-    
+        // Iterate through the feedback list and display each feedback item
         foreach (var feedback in feedbackList)
         {
             GameObject feedbackItem = Instantiate(feedbackItemPrefab, feedbackContentParent);
@@ -213,19 +198,19 @@ public class LevelManager : MonoBehaviour
 
         feedbackPanel.transform.SetSiblingIndex(feedbackPanel.transform.parent.childCount);
 
-
+        // Check if background music is playing then pause it
         if (backgroundMusic != null && backgroundMusic.isPlaying)
         {
-            backgroundMusic.Pause();
+            backgroundMusic.Pause(); // Pause background music
         }
 
- 
+        // Check if feedback panel sound effect is assigned 
         if (feedbackPanelSound != null)
         {
-            audioSource.PlayOneShot(feedbackPanelSound);
+            audioSource.PlayOneShot(feedbackPanelSound); // Play the feedback panel sound effect
         }
 
-
+        // Clear the previous feedback items
         foreach (Transform child in feedbackContentParent)
         {
             Destroy(child.gameObject);
@@ -261,6 +246,7 @@ public class LevelManager : MonoBehaviour
 
         playerAnswerText.horizontalOverflow = HorizontalWrapMode.Wrap;  
         playerAnswerText.verticalOverflow = VerticalWrapMode.Overflow;  
+
         // Get the feedback data for the current level (same feedback data as when a level ends)
         List<QuizManager.FeedbackData> feedbackList = quizManager.GetLevelFeedback(ProgressManager.Instance.currentLevel);
 
@@ -286,24 +272,29 @@ public class LevelManager : MonoBehaviour
     public void RestartLevel()
     {
   
-        SceneManager.LoadScene("GameOver"); 
+        SceneManager.LoadScene("GameOver"); // Load the Game Over Scene 
     }
 
-    // Function to move to the next level when the button is clicked
+
+
+    // Move to the next level when the "Next Level" button is clicked
     public void OnNextLevelButtonClicked()
     {
         FeedbackDarkOverlay.SetActive(false); 
-        feedbackPanel.SetActive(false); 
+        feedbackPanel.SetActive(false);
 
-    
+        // Check if background music is assigned
         if (backgroundMusic != null)
         {
-            backgroundMusic.UnPause();
+            backgroundMusic.UnPause(); // Resume the background music
         }
 
         MoveToNextLevel();
     }
 
+
+
+    // Method to move to the next level 
     public void MoveToNextLevel()
     {
         currentLevel++;
@@ -323,7 +314,6 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("All levels completed. Transitioning to end screen.");
             SceneManager.LoadScene("Win"); 
         }
     }

@@ -388,8 +388,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.00001049}
-  m_SizeDelta: {x: 1294.3993, y: 649.134}
+  m_AnchoredPosition: {x: 0, y: 10.183}
+  m_SizeDelta: {x: 1330.4618, y: 649.134}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &427249129
 MonoBehaviour:
@@ -413,7 +413,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7b23788397fcc5440860536607dfef82, type: 3}
-    m_FontSize: 35
+    m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -424,9 +424,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Defeat the boss by answering quiz questions correctly. \n\nEach correct
-    answer damages the boss, while incorrect answers damage you.\n\nWin by depleting
-    the boss's health to advance to the next level.\n\nGood Luck!"
+  m_Text: "Defeat the enemy boss by answering quiz questions correctly. \n\nEach
+    correct answer will deal damage to the boss, while incorrect answers will damage
+    you.\n\nDefeat the boss to progress to the next level.\n\nGood Luck!"
 --- !u!222 &427249130
 CanvasRenderer:
   m_ObjectHideFlags: 0

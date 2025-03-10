@@ -4,49 +4,42 @@ using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour
 {
-    public GameObject settingsPanel;        // Reference to the settings panel
-    public Slider volumeSlider;             // Reference to the volume slider
-    public Button resumeButton;             // Reference to the resume button
-    public Button settingsButton;           // Reference to the settings button
-    public Button quitButton;               // Reference to the quit button
-    public AudioSource backgroundMusic;     // Reference to the background music AudioSource
-    public GameObject darkOverlay;          // Reference to the dark overlay
+    public GameObject settingsPanel; 
+    public Slider volumeSlider;      
+    public Button resumeButton;   
+    public Button settingsButton; 
+    public Button quitButton;    
+    
+    public AudioSource backgroundMusic;     
+    public GameObject darkOverlay;        
 
-    private float maxVolume = 0.9f;         // Set max volume to 90%
-    private float defaultVolume = 0.9f;     // Default volume is 90%
+    private float maxVolume = 0.9f; // Max Volume      
+    private float defaultVolume = 0.9f; // Default Volume 
 
     void Start()
     {
-        // Apply the saved volume setting
-        ApplySavedVolume();
-
-        // Set the slider's maximum value to 0.9
+       
+        ApplySavedVolume(); // Apply Saved Volume Setting 
         volumeSlider.maxValue = maxVolume;
-
-        // Set the slider value to match the current global volume (savedVolume)
-        volumeSlider.value = AudioListener.volume; // Reflect the actual volume on the slider
-
-        // Add listener to the volume slider to adjust the game volume
+        volumeSlider.value = AudioListener.volume; 
         volumeSlider.onValueChanged.AddListener(SetVolume);
 
-        // Add listener for the resume button
-        resumeButton.onClick.AddListener(ResumeGame);
+        resumeButton.onClick.AddListener(ResumeGame); // Resume Game 
 
-        // Add listener for the settings button to open the settings panel
-        settingsButton.onClick.AddListener(ShowSettingsPanel);
+        settingsButton.onClick.AddListener(ShowSettingsPanel); // Show settings
 
-        // Add listener for the quit button
-        quitButton.onClick.AddListener(QuitGame);
+        quitButton.onClick.AddListener(QuitGame); // Quit game
     }
 
-    // This method is used to apply the saved volume from PlayerPrefs
+
+    // Method to apply the saved volume from PlayerPrefs
     private void ApplySavedVolume()
     {
-        float savedVolume = PlayerPrefs.GetFloat("volume", defaultVolume); // Retrieve saved volume
-        AudioListener.volume = savedVolume;   // Set global volume to saved or default value
+        float savedVolume = PlayerPrefs.GetFloat("volume", defaultVolume);  // Get saved volume
+        AudioListener.volume = savedVolume; // Apply volume
         if (backgroundMusic != null)
         {
-            backgroundMusic.volume = savedVolume; // Set background music volume to saved or default value
+            backgroundMusic.volume = savedVolume; // Apply to music
         }
     }
 
@@ -61,13 +54,10 @@ public class SettingsManager : MonoBehaviour
                 backgroundMusic.Play(); // Start playing the background music
             }
         }
-        else
-        {
-            Debug.LogError("Background music AudioSource is not assigned!");
-        }
+       
     }
 
-    // Adjusts the global volume based on the slider, limiting it to 0.9 max
+    // Method to set the volume of the game and background music
     public void SetVolume(float volume)
     {
         AudioListener.volume = volume;  // Adjusts the overall game volume, max 0.9
@@ -81,32 +71,37 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    // Pauses the game and shows the settings panel
+
+    // Method to show the settings panel and pause the game
     public void ShowSettingsPanel()
     {
-        settingsPanel.SetActive(true);    // Show the settings panel when the button is clicked
-        darkOverlay.SetActive(true);      // Show the dark overlay
-        Time.timeScale = 0f;              // Pause the game
+        settingsPanel.SetActive(true);   
+        darkOverlay.SetActive(true);      
+        Time.timeScale = 0f;   
     }
 
-    // Resumes the game and hides the settings panel
+
+    // Method to resume the game and hide the settings panel
     public void ResumeGame()
     {
-        settingsPanel.SetActive(false);    // Hide the settings panel
-        darkOverlay.SetActive(false);      // Hide the dark overlay
-        Time.timeScale = 1f;               // Resume the game
+        settingsPanel.SetActive(false);    
+        darkOverlay.SetActive(false);     
+        Time.timeScale = 1f;             
     }
 
-    // Quits the game or returns to the main menu
+
+    // Method to quit the game or return to the main menu
     public void QuitGame()
     {
-        Debug.Log("Quit button pressed. Returning to main menu or quitting game.");
+        Debug.Log("Returning to main menu or quitting game.");
 
-        // Reset progress (but not settings like volume)
+       
         ResetProgress(); // Clear game progress but retain settings
 
         SceneManager.LoadScene("MainMenu"); // Load main menu scene
     }
+
+
 
     // Resets the game progress
     private void ResetProgress()
@@ -115,9 +110,6 @@ public class SettingsManager : MonoBehaviour
         {
             ProgressManager.Instance.ResetGame(); // Reset the game's progress
         }
-        else
-        {
-            Debug.LogWarning("ProgressManager is not found or not assigned.");
-        }
+   
     }
 }

@@ -4,36 +4,36 @@ using System.Collections;
 
 public class DamagePopUp : MonoBehaviour
 {
-    public GameObject damageTextPrefab; // Reference to the prefab of the damage text
-    public Canvas canvas; // Reference to the Canvas in the scene
+    public GameObject damageTextPrefab; // Damage Text prefab 
+    public Canvas canvas; 
+
 
     public void ShowDamage(float damageAmount, Vector3 position)
     {
-        // Instantiate the damage text prefab
-        GameObject damageText = Instantiate(damageTextPrefab, canvas.transform);
+       
+        GameObject damageText = Instantiate(damageTextPrefab, canvas.transform);  // Instantiate the damage text prefab
 
-        // Set the text to display the damage amount with a minus sign
+        // Display the damage taken 
         Text text = damageText.GetComponent<Text>();
-        text.text = "-" + damageAmount.ToString();  // Add "-" before the damage value
+        text.text = "-" + damageAmount.ToString();  
 
-        // Position the damage text above the character's position
+        // Set position of the damage text to the Characters
         damageText.transform.position = position;
 
-        // Start the fade and move-up animation
+        // Play the damage popup text animation 
         StartCoroutine(FadeAndMoveUp(damageText, text));
     }
 
 
+// Coroutine for the damage pop-up animation effect.
     private IEnumerator FadeAndMoveUp(GameObject damageText, Text text)
     {
         float duration = 1.5f; // Duration of the fade and move-up effect
         float elapsedTime = 0f;
+    
+        Vector3 startPosition = damageText.transform.position; // Start position
 
-        // Initial position
-        Vector3 startPosition = damageText.transform.position;
-
-        // Target position (move upwards)
-        Vector3 targetPosition = startPosition + new Vector3(0, 150, 0);
+        Vector3 targetPosition = startPosition + new Vector3(0, 150, 0);  // Move text upwards
 
         Color startColor = text.color;
 
@@ -49,8 +49,6 @@ public class DamagePopUp : MonoBehaviour
 
             yield return null;
         }
-
-        // Destroy the damage text object after the animation is complete
-        Destroy(damageText);
+        Destroy(damageText); // Destroy the game object
     }
 }

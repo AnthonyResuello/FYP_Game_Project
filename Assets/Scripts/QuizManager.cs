@@ -5,11 +5,12 @@ using System.Collections;
 
 public class QuizManager : MonoBehaviour
 {
-    public Text questionText; // Reference to the UI text element for displaying the question
-    public Button[] answerButtons; // Buttons for answers
-    public PlayerHealth playerHealth; // Reference to PlayerHealth script
-    public NPCHealth npcHealth; // Reference to NPCHealth script
-    public LevelManager levelManager; // Reference to LevelManager script
+    public Text questionText; 
+    public Button[] answerButtons; 
+    public PlayerHealth playerHealth; 
+    public NPCHealth npcHealth; 
+    public LevelManager levelManager; 
+
     public PlayerAnimationController playerAnimationController;
     public Player2AnimationController player2AnimationController;
 
@@ -27,10 +28,10 @@ public class QuizManager : MonoBehaviour
     // Struct to store feedback data
     public struct FeedbackData
     {
-        public string questionText;
-        public string correctAnswer;
-        public string playerAnswer;
-        public string explanation;
+        public string questionText; // Question Text 
+        public string correctAnswer; // Correct Answer
+        public string playerAnswer; // Player's Answer to the question
+        public string explanation; // Explanation for the answer
 
         public FeedbackData(string question, string correct, string player, string explanation)
         {
@@ -94,6 +95,7 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+
     // Method to check the answer selected by the user
     void CheckAnswer(int selectedAnswerIndex)
     {
@@ -107,7 +109,7 @@ public class QuizManager : MonoBehaviour
 
         if (selectedAnswerIndex == currentQuestion.correctAnswerIndex)
         {
-            Debug.Log("Correct answer!");
+            Debug.Log("Correct answer!"); 
             npcHealth.TakeDamage(10f);   // Apply damage to the NPC
             playerAnimationController.PlayAttackAnimation(); // Show animation for attack 
 
@@ -154,7 +156,7 @@ public class QuizManager : MonoBehaviour
         DisplayNextQuestion(); // Display the next question
     }
 
-    // New method to get the feedback list for a specific level
+    // Method to get the feedback list for a specific level
     public List<FeedbackData> GetLevelFeedback(int level)
     {
         return feedbackList; 

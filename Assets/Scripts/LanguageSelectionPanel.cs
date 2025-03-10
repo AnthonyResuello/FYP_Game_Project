@@ -4,39 +4,35 @@ using UnityEngine.UI;
 
 public class LanguageSelectionPanel : MonoBehaviour
 {
-    public Button javascriptButton;
-    public Button javaButton;
-    public Button csharpButton;
-    public Button pythonButton;
+    public Button javascriptButton; // JavaScript Button 
+    public Button javaButton; // Java Button 
+    public Button csharpButton; // CSharp Button 
+    public Button pythonButton; // Python Button 
 
-    public string selectedLanguage;
+    public string selectedLanguage; // Store Selected programming langauge
 
     void Start()
     {
-        // Add listeners to buttons
         javascriptButton.onClick.AddListener(() => SelectLanguage("JavaScript"));
         javaButton.onClick.AddListener(() => SelectLanguage("Java"));
         csharpButton.onClick.AddListener(() => SelectLanguage("C#"));
         pythonButton.onClick.AddListener(() => SelectLanguage("Python"));
     }
 
-    // Method to handle language selection
+    // Method to manage the language selection of the player
     public void SelectLanguage(string language)
     {
         selectedLanguage = language;
-        Debug.Log("Selected language: " + selectedLanguage);
-
+       
         // Store selected language in PlayerPrefs so that it's persistent across scenes
         PlayerPrefs.SetString("SelectedLanguage", selectedLanguage);
         PlayerPrefs.Save();
 
-        // Proceed to the game (after language selection)
-        ProceedToGame();
+        ProceedToGame();  // Start the game 
     }
 
     public void ProceedToGame()
     {
-        // Proceed to quiz level scene or reset the current scene to update the questions
-        SceneManager.LoadScene("Level1");  // Load the quiz scene (adjust as needed)
+        SceneManager.LoadScene("Level1");  // Load Level1 
     }
 }
