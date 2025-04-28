@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class WinManager : MonoBehaviour
 {
-    public Button mainMenuButton;  
-    public Button playAgainButton; 
+    public Button mainMenuButton; // Main menu button
+    public Button playAgainButton; // Play again button
     public GameObject winPanel;    
 
     void Start()
@@ -35,7 +35,7 @@ public class WinManager : MonoBehaviour
     
         if (ProgressManager.Instance != null)
         {
-            ProgressManager.Instance.ResetGame(); // Reset progress to default state
+            ProgressManager.Instance.ResetGame(); // Reset progress 
         }
 
         SceneManager.LoadScene("MainMenu"); // Load the main menu scene
@@ -50,7 +50,7 @@ public class WinManager : MonoBehaviour
      
         if (ProgressManager.Instance != null)
         {
-            ProgressManager.Instance.ResetGame(); // Reset progress to default state
+            ProgressManager.Instance.ResetGame(); // Reset progress 
         }
 
         // Reload the first level scene

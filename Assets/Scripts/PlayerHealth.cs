@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement; // Needed for scene transitions
+using UnityEngine.SceneManagement; 
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
         // Show damage pop-up
         if (damagePopUpManager != null)
         {
-            damagePopUpManager.ShowDamage(amount, transform.position + new Vector3(0, 1, 0)); // Position slightly above the player
+            damagePopUpManager.ShowDamage(amount, transform.position + new Vector3(0, 1, 0)); // To show above the Player
         }
 
         UpdateHealthBar();
@@ -83,7 +83,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // Method to check if the game is over (health <= 0)
+    // Method to check if the game is over 
     private void CheckGameOver()
     {
         if (currentHP <= 0 && !isGameOver)

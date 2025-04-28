@@ -10,7 +10,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>(); // Initialize Animator component
+        animator = GetComponent<Animator>(); 
     }
 
     // Method to play the Hurt Animation 

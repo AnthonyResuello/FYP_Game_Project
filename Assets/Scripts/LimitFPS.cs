@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FPSLimiter : MonoBehaviour
 {
-    public int targetFPS = 60; // Set the desired FPS here
+    public int targetFPS = 60; // Set to 60FPS
 
     void Start()
     {

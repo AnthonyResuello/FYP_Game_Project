@@ -33,7 +33,7 @@ public class NPCHealth : MonoBehaviour
         // Show damage pop-up text 
         if (damagePopUpManager != null)
         {
-            damagePopUpManager.ShowDamage(damage, transform.position + new Vector3(0, 1, 0)); // Position slightly above the NPC
+            damagePopUpManager.ShowDamage(damage, transform.position + new Vector3(0, 1, 0)); // To show above the NPC
         }
 
         UpdateHealthUI();

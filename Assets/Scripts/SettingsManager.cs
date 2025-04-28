@@ -4,14 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour
 {
-    public GameObject settingsPanel; 
-    public Slider volumeSlider;      
-    public Button resumeButton;   
-    public Button settingsButton; 
-    public Button quitButton;    
+    public GameObject settingsPanel; // Setting panel 
+    public Slider volumeSlider; // Music Slider 
+    public Button resumeButton; // Continue Button
+    public Button settingsButton; // Settings icon button
+    public Button quitButton; // Quit button
     
-    public AudioSource backgroundMusic;     
-    public GameObject darkOverlay;        
+    public AudioSource backgroundMusic; // Backgorund Music
+    public GameObject darkOverlay; // Dark Overlay 
 
     private float maxVolume = 0.9f; // Max Volume      
     private float defaultVolume = 0.9f; // Default Volume 
@@ -60,10 +60,10 @@ public class SettingsManager : MonoBehaviour
     // Method to set the volume of the game and background music
     public void SetVolume(float volume)
     {
-        AudioListener.volume = volume;  // Adjusts the overall game volume, max 0.9
+        AudioListener.volume = volume;  // Adjusts the overall game volume
         if (backgroundMusic != null)
         {
-            backgroundMusic.volume = volume; // Adjusts the background music volume too
+            backgroundMusic.volume = volume; // Adjusts the background music volume 
         }
 
         // Save the volume setting to PlayerPrefs so it persists across sessions
@@ -96,7 +96,7 @@ public class SettingsManager : MonoBehaviour
         Debug.Log("Returning to main menu or quitting game.");
 
        
-        ResetProgress(); // Clear game progress but retain settings
+        ResetProgress(); // Clear game progress but keep settings
 
         SceneManager.LoadScene("MainMenu"); // Load main menu scene
     }

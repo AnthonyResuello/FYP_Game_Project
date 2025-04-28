@@ -23,7 +23,6 @@ public class GameOver : MonoBehaviour
     }
 
 
-    // This function will be called when the Try Again button is clicked
     public void OnTryAgain()
     {
 
@@ -33,7 +32,7 @@ public class GameOver : MonoBehaviour
         }
 
         // Reload the game scene (Level 1)
-        SceneManager.LoadScene("Level1"); // Make sure this is your game scene name
+        SceneManager.LoadScene("Level1"); 
         Time.timeScale = 1f; // Unpause the game when reloading the level
     }
 
@@ -42,7 +41,7 @@ public class GameOver : MonoBehaviour
        
         if (ProgressManager.Instance != null)
         {
-            ProgressManager.Instance.ResetGame(); // Reset progress to default state
+            ProgressManager.Instance.ResetGame(); // Reset progress 
         }
 
         SceneManager.LoadScene("MainMenu"); 

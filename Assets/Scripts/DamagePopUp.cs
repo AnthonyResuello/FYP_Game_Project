@@ -25,7 +25,7 @@ public class DamagePopUp : MonoBehaviour
     }
 
 
-// Coroutine for the damage pop-up animation effect.
+// Coroutine for the damage pop-up animation effect
     private IEnumerator FadeAndMoveUp(GameObject damageText, Text text)
     {
         float duration = 1.5f; // Duration of the fade and move-up effect

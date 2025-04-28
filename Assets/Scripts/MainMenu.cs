@@ -12,8 +12,8 @@ public class MainMenu : MonoBehaviour
     public AudioClip panelOpenSound; // Sound effect for opening panel
     public AudioClip panelCloseSound; // Sound effect for closing panel
 
-    private AudioSource audioSource; // AudioSource to handle music and sound effects
-    private AudioSource backgroundMusicSource; // Separate AudioSource for background music
+    private AudioSource audioSource; // For music and sound effects
+    private AudioSource backgroundMusicSource; // For background music
 
     public GameObject languageSelectionPanel; // Language selection panel
     public GameObject darkOverlay; // Dark overlay 
@@ -44,8 +44,8 @@ public class MainMenu : MonoBehaviour
 
         backgroundMusicSource.Pause();  // Pause the background music
 
-        languageSelectionPanel.SetActive(true); // Activate the language selection panel
-        darkOverlay.SetActive(true); // Activate the dark overlay
+        languageSelectionPanel.SetActive(true); 
+        darkOverlay.SetActive(true); 
 
         Time.timeScale = 0f; // Pause the game while the panel is open
     }
@@ -60,8 +60,8 @@ public class MainMenu : MonoBehaviour
             audioSource.PlayOneShot(panelCloseSound); // Play sound effect 
         }
 
-        languageSelectionPanel.SetActive(false); // Deactivate the language selection panel
-        darkOverlay.SetActive(false); // Deactivate the dark overlay
+        languageSelectionPanel.SetActive(false); 
+        darkOverlay.SetActive(false); 
         Time.timeScale = 1f;  // Resume the game
 
         backgroundMusicSource.Play(); // Resume the background music when the panel is closed 

@@ -10,7 +10,7 @@ public class Player2AnimationController : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>(); // Initialize Animator component
+        animator = GetComponent<Animator>(); 
     }
 
 

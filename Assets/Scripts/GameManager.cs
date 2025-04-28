@@ -1,28 +1,23 @@
 using UnityEngine;
-using UnityEngine.UI; // Required for UI components
+using UnityEngine.UI; 
 
 public class GameManager : MonoBehaviour
 {
     public GameObject infoPanel; // Info panel 
-    public GameObject darkOverlay; // Add a dark overlay 
+    public GameObject darkOverlay; // Dark overlay to cover background
     public Button closeButton; // Close Button to close panel 
 
     public AudioSource backgroundMusic; // Background music for the game 
     public AudioSource panelOpenSound; // Panel sound effect
     public AudioClip confirmSound; // Confirm sound effect
 
-    private AudioSource audioSource; // Reference for the AudioSource for UI sounds
+    private AudioSource audioSource; // For UI sounds
 
     void Start()
     {
-        // Get or create an AudioSource for UI sounds
         audioSource = gameObject.AddComponent<AudioSource>();
-
-        // Show the info panel when the game starts
-        ShowInfoPanel();
-
-        // Add listener for the close button
-        closeButton.onClick.AddListener(OnCloseButtonClicked);
+        ShowInfoPanel(); // Show the info panel when the game starts
+        closeButton.onClick.AddListener(OnCloseButtonClicked); // Add listener for the close button
     }
 
 
@@ -30,8 +25,8 @@ public class GameManager : MonoBehaviour
     // Method to show the info panel and dark overlay
     public void ShowInfoPanel()
     {
-        infoPanel.SetActive(true); // Activate the info panel
-        darkOverlay.SetActive(true); // Activate dark overlay 
+        infoPanel.SetActive(true); 
+        darkOverlay.SetActive(true); 
         Time.timeScale = 0f; // Pause the game when the panel is open 
 
         // Check if open panel sound effect is assigned 
@@ -47,8 +42,8 @@ public class GameManager : MonoBehaviour
     // Method to hide the info panel and dark overlay
     public void HideInfoPanel()
     {
-        infoPanel.SetActive(false); // Deactivate the info panel
-        darkOverlay.SetActive(false); // Deactivate the dark overlay
+        infoPanel.SetActive(false);
+        darkOverlay.SetActive(false); 
         Time.timeScale = 1f; // Resume the game when the panel is closed 
 
         StartBackgroundMusic(); // Start the background music 

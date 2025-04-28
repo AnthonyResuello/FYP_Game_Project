@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestionManager : MonoBehaviour
@@ -466,7 +465,7 @@ public class QuestionManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"No questions found for language {language} and level {level}");
+       
             return new List<Question>(); // Return empty list if no questions are found
         }
     }

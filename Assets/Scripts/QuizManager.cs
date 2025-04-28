@@ -5,11 +5,11 @@ using System.Collections;
 
 public class QuizManager : MonoBehaviour
 {
-    public Text questionText; 
-    public Button[] answerButtons; 
-    public PlayerHealth playerHealth; 
-    public NPCHealth npcHealth; 
-    public LevelManager levelManager; 
+    public Text questionText; // Text for the questions 
+    public Button[] answerButtons; // Answer buttons
+    public PlayerHealth playerHealth; // Player health 
+    public NPCHealth npcHealth; // Enemy NPC healh
+    public LevelManager levelManager;
 
     public PlayerAnimationController playerAnimationController;
     public Player2AnimationController player2AnimationController;
