@@ -1,5 +1,6 @@
 
-How to start the game:
+How to start the game in Unity:
+
 
 1. Once you opened the project in Unity 
 
